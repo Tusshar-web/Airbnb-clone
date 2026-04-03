@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="output.css" />
+    <link rel="stylesheet" href="input.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+   <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+    }
+
+    .hero-box {
+      background: linear-gradient(135deg, #1abc9c, #16a085);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .header {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: white;
+      color: #16a085;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #f1f1f1;
+    }
+
+    /* Container for all cards */
+.homes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 90%;
+  margin: 20px auto;
+}
+
+/* Individual card */
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.book {
+  background-color:  rgb(131, 243, 131) ;
+  margin-top: 20px;
+  border: none;
+}
+
+.det_btn {
+  background-color: rgb(92, 92, 248);
+}
+  </style>
+  <body>
+    <!-- <nav>
+      <div class="logo">Airbnb</div>
+      <a href="/"> Go to home </a>
+      <a href="/host/add-home"> Add home </a>
+    </nav> -->
+    <%- include('../partials/nav') %>
+<div class="hero-box">
+  <h1 class="header">Welcome to Airbnb</h1>
+  <a href="/host/add-home" class="btn">Add Home</a>
+</div>
+
+<main class="container"></main>
+  <h2>here are our Registered Homes</h2>
+
+    <div class="homes-container">
+      <% registeredHomes.forEach(home => { %>
+
+        <div class="card">
+          <img src="<%= home.photo %>" alt="Home Image" class="home-img"/>
+
+          <h3><%= home.houseName %></h3>
+          <p><strong>📍 Location:</strong> <%= home.location %></p>
+          <p><strong>💰 Price:</strong> ₹<%= home.price %></p>
+          <p><strong>⭐ Rating:</strong> <%= home.rating %></p>
+          <a class="det_btn" href="/store/home-detail/<%= home._id %>">Details</a>
+          <!-- <button class="book">Book</button> -->
+           <%- include('../partials/fav', { home: home }) %>
+        </div>
+
+      <% }) %>
+    </div>
+</main>
+  </body>
+</html>

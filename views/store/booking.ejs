@@ -1,0 +1,60 @@
+<body>
+
+  <%- include('../partials/nav') %>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+    }
+
+    .booking_display {
+      width: 90%;
+      max-width: 700px;
+      margin: 60px auto;
+      background: white;
+      padding: 40px 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .msg {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1abc9c;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    /* Optional button */
+    .btn {
+      display: inline-block;
+      background: #1abc9c;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #16a085;
+    }
+  </style>
+
+  <div class="booking_display">
+    <div class="msg">📖 Your Bookings</div>
+    <h1>Your bookings will be shown here</h1>
+
+    <a href="/" class="btn">Browse Homes</a>
+  </div>
+
+</body>

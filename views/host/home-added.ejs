@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Added Successfully</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f7fa;
+      }
+
+      header {
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      /* Success Card */
+      .success-box {
+        background: white;
+        width: 90%;
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 40px 20px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      }
+
+      .success-box h1 {
+        color: #2ecc71;
+        margin-bottom: 20px;
+      }
+
+      /* Button */
+      .btn {
+        display: inline-block;
+        background: #1abc9c;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        margin-top: 20px;
+      }
+
+      .btn:hover {
+        background: #16a085;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="success-box">
+      <h1>✅ Home Registered Successfully</h1>
+      <p>Your home has been added to the listings.</p>
+
+      <a href="/" class="btn">Go to Home</a>
+    </div>
+
+  </body>
+</html>
