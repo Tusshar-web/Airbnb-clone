@@ -3,69 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found</title>
-
+  <title>404 – Page Not Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    :root {
+      --brand: #1abc9c;
+      --brand-dark: #16a085;
+      --navy: #2c3e50;
+      --text: #333;
+      --muted: #888;
+      --bg: #f5f7fa;
+    }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .error-wrapper {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background: linear-gradient(160deg, #f5f7fa 60%, #d6ede8 100%);
+    }
+
+    .error-card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(44, 62, 80, 0.12);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      text-align: center;
+      animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .error-card__bar {
+      height: 5px;
+      background: linear-gradient(90deg, #e74c3c, #c0392b);
+    }
+
+    .error-card__body {
+      padding: 50px 40px 44px;
+    }
+
+    /* Animated 404 number */
+    .error-code {
+      font-family: 'DM Serif Display', serif;
+      font-size: 96px;
+      line-height: 1;
+      letter-spacing: -4px;
+      background: linear-gradient(135deg, #e74c3c 30%, #c0392b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.75; }
+    }
+
+    /* Illustration dots */
+    .error-dots {
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
+      gap: 8px;
+      margin-bottom: 24px;
     }
 
-    .error-box {
-      text-align: center;
-      background: white;
-      padding: 50px 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      max-width: 500px;
-      width: 90%;
+    .error-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e74c3c;
+      opacity: 0.3;
+      animation: blink 1.4s ease-in-out infinite;
     }
 
-    .error-code {
-      font-size: 4rem;
-      color: #e74c3c;
-      margin-bottom: 10px;
+    .error-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .error-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.3); }
     }
 
-    h1 {
-      margin-bottom: 15px;
+    .error-card h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 12px;
+      letter-spacing: -0.4px;
     }
 
-    p {
-      color: #777;
-      margin-bottom: 25px;
+    .error-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .btn {
+    .btn-home {
       display: inline-block;
-      background: #1abc9c;
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
       color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
+      padding: 14px 32px;
+      border-radius: 12px;
       text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 6px 20px rgba(26, 188, 156, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .btn:hover {
-      background: #16a085;
+    .btn-home:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(26, 188, 156, 0.45);
+    }
+
+    .btn-home:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 480px) {
+      .error-card__body { padding: 36px 24px 32px; }
+      .error-code { font-size: 72px; }
+      .error-card h1 { font-size: 22px; }
     }
   </style>
 </head>
 
 <body>
-  <% include ('partials/nav') %>
-  <div class="error-box">
-    <div class="error-code">404</div>
-    <h1>Page Not Found</h1>
-    <p>Oops! The page you are looking for does not exist on Airbnb.</p>
+  <%- include('partials/nav') %>
 
-    <a href="/" class="btn">Go Back Home</a>
+  <div class="error-wrapper">
+    <div class="error-card">
+      <div class="error-card__bar"></div>
+      <div class="error-card__body">
+
+        <div class="error-code">404</div>
+
+        <div class="error-dots">
+          <span></span><span></span><span></span>
+        </div>
+
+        <h1>Page Not Found</h1>
+        <p>Oops! The page you're looking for doesn't exist or may have been moved.</p>
+
+        <a href="/" class="btn-home">← Back to Home</a>
+
+      </div>
+    </div>
   </div>
 
 </body>

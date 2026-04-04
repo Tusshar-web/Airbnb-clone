@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Airbnb Clone</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brand: #1abc9c;
+            --brand-dark: #16a085;
+            --navy: #2c3e50;
+            --text: #333;
+            --muted: #888;
+            --border: #e1e8f0;
+            --bg: #f5f7fa;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── Navbar (from nav partial) ── */
+        /* The nav partial brings its own styles; we just ensure body isn't flex */
+
+        /* ── Page layout ── */
+        .login-wrapper {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(160deg, #f5f7fa 60%, #d6ede8 100%);
+        }
+
+        /* ── Card ── */
+        .login-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 24px 60px rgba(44, 62, 80, 0.12);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+            animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* accent bar */
+        .login-card__bar {
+            height: 5px;
+            background: linear-gradient(90deg, var(--brand), var(--brand-dark));
+        }
+
+        .login-card__body {
+            padding: 44px 40px 40px;
+        }
+
+        /* ── Header ── */
+        .login-card__logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .login-card__logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .login-card__logo span {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
+            color: var(--navy);
+            letter-spacing: -0.3px;
+        }
+
+        .login-card h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 30px;
+            font-weight: 400;
+            color: var(--navy);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .login-card__sub {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 32px;
+        }
+
+        /* ── Form — scoped class to avoid nav.ejs global form styles ── */
+        .login-form {
+            background: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+            max-width: none !important;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'DM Sans', sans-serif;
+            background: #fafbfc;
+            color: var(--text);
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--brand);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.12);
+        }
+
+        /* ── Submit button ── */
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            cursor: pointer;
+            margin-top: 8px;
+            box-shadow: 0 6px 20px rgba(26, 188, 156, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(26, 188, 156, 0.45);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(26, 188, 156, 0.3);
+        }
+
+        /* ── Footer note ── */
+        .login-card__footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .login-card__footer a {
+            color: var(--brand-dark);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-card__footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 480px) {
+            .login-card__body {
+                padding: 32px 24px 28px;
+            }
+
+            .login-card h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('../partials/nav') %>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-card__bar"></div>
+            <div class="login-card__body">
+
+                <div class="login-card__logo">
+                    <!-- Airbnb-style flame icon -->
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 3C16 3 7 13 7 19a9 9 0 0018 0C25 13 16 3 16 3z" fill="#1abc9c" opacity="0.2"/>
+                        <path d="M16 7C16 7 9 15 9 19a7 7 0 0014 0C23 15 16 7 16 7z" fill="#1abc9c" opacity="0.5"/>
+                        <path d="M16 12C16 12 12 17 12 20a4 4 0 008 0C20 17 16 12 16 12z" fill="#1abc9c"/>
+                    </svg>
+                    <span>Airbnb Clone</span>
+                </div>
+
+                <h1>Welcome back</h1>
+                <p class="login-card__sub">Sign in to manage your homes and bookings.</p>
+
+                <form class="login-form" action="/logged" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-login">Sign In</button>
+                </form>
+
+                <p class="login-card__footer">
+                    Don't have an account? <a href="/signup">Contact your host</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

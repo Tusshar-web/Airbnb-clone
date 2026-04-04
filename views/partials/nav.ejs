@@ -73,14 +73,14 @@ body {
 }
 
 /* Form */
-form {
+/* form {
   background: white;
   padding: 20px;
   border-radius: 10px;
   max-width: 500px;
   margin: auto;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+} */
 
 input {
   width: 100%;
@@ -96,15 +96,51 @@ input {
   margin-top: 50px;
   color: #777;
 }
+
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logout-form {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  max-width: none;
+}
 </style>
 <div class="navbar">
-  <h1>Airbnb Clone</h1>
-  <div>
+  <a href="/store/home-list" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 3C16 3 7 13 7 19a9 9 0 0018 0C25 13 16 3 16 3z" fill="#1abc9c" opacity="0.2"/>
+      <path d="M16 7C16 7 9 15 9 19a7 7 0 0014 0C23 15 16 7 16 7z" fill="#1abc9c" opacity="0.5"/>
+      <path d="M16 12C16 12 12 17 12 20a4 4 0 008 0C20 17 16 12 16 12z" fill="#1abc9c"/>
+    </svg>
+    <h1>Airbnb Clone</h1>
+  </a>
+  <div style="display: flex; align-items: center;">
     <!-- <a href="/">Index</a> -->
     <a href="/store/home-list">Home</a>
+    <% if(isLoggedIn) { %>
     <a href="/store/booking">Bookings</a>
     <a href="/store/fav-list">Favourite Homes</a>
     <a href="/host/host-home-list">Host Homes</a>
     <a href="/host/add-home">Add Home</a>
+    <% } %>
+
+    <% if(!isLoggedIn) { %>
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
+    <% } else { %> 
+      <form class="logout-form" action="/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form>
+    <% } %>
   </div>
 </div>
