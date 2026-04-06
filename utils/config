@@ -1,0 +1,14 @@
+const path = require('path')
+require('dotenv').config({ path: path.join(__dirname, '.env') })
+
+console.log("ENV CHECK:", process.env.MONGO_URL) // ← add this
+
+const MONGO_URL = process.env.MONGO_URL
+const PORT = process.env.PORT
+const SESSION_SECRET = process.env.SESSION_SECRET
+
+module.exports = {
+    MONGO_URL,
+    PORT,
+    SESSION_SECRET
+}

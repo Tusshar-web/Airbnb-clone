@@ -72,15 +72,6 @@ body {
   background: #16a085;
 }
 
-/* Form */
-/* form {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
-  margin: auto;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-} */
 
 input {
   width: 100%;
@@ -128,10 +119,13 @@ form {
     <!-- <a href="/">Index</a> -->
     <a href="/store/home-list">Home</a>
     <% if(isLoggedIn) { %>
-    <a href="/store/booking">Bookings</a>
-    <a href="/store/fav-list">Favourite Homes</a>
-    <a href="/host/host-home-list">Host Homes</a>
-    <a href="/host/add-home">Add Home</a>
+      <% if (user && user.usertype === 'host') { %>
+        <a href="/host/host-home-list">Host Homes</a>
+        <a href="/host/add-home">Add Home</a>
+      <% } else { %>
+        <a href="/store/booking">Bookings</a>
+        <a href="/store/fav-list">Favourite Homes</a>
+      <% } %>
     <% } %>
 
     <% if(!isLoggedIn) { %>
