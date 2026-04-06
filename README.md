@@ -1,122 +1,98 @@
-# 🏠 Airbnb Clone
+# Airbnb Clone 🏡
 
-A full-stack web application inspired by Airbnb, built with Node.js, Express, MongoDB, and EJS. Users can browse homes, view details, and save favourites. Hosts can list, edit, and delete their properties.
-
----
-
-## 🚀 Features
-
-- **Browse Homes** — View all listed properties with photos, price, location, and rating
-- **Home Details** — Click any listing to see its full description and details
-- **Add / Edit / Delete Homes** — Hosts can manage their property listings
-- **Favourites** — Save homes to a personal favourites list
-- **Bookings Page** — View available homes for booking
+A full-stack web application inspired by Airbnb, built with **Node.js**, **Express**, **MongoDB**, **EJS**, and styled using **TailwindCSS** and custom CSS. This project demonstrates building a multi-role property marketplace where users can act as guests or hosts.
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Features
 
-| Layer | Technology |
-|---|---|
-| Runtime | Node.js |
-| Framework | Express.js |
-| Database | MongoDB + Mongoose |
-| Templating | EJS |
-| Styling | Tailwind CSS + Custom CSS |
+### 👤 Authentication & Roles
+- **Secure Authentication:** User sign-up and login securely hashed with `bcryptjs`. Form inputs are thoroughly validated using `express-validator`.
+- **Role-Based Workflows:** Users choose to register as either a **Host** or **Guest**, each with their own tailored features and navigation bars.
+- **Session Management:** Secure user sessions stored in MongoDB using `express-session` and `connect-mongo`.
 
----
+### 🏨 Host Experience (Property Management)
+- **Add Homes:** Hosts can list their properties providing details such as property name, description, price, location, photos, and ratings.
+- **Manage Listings:** Hosts have access to a dedicated dashboard to view and manage all their actively listed homes.
 
-## 📁 Project Structure
+### ✈️ Guest Experience (Discovery & Booking)
+- **Discover Properties:** Browse through the entire home marketplace.
+- **Favorites:** Guests can save appealing homes into their personal Favorites list.
+- **Bookings:** Guests can track the homes they have booked directly from their Bookings tab.
 
-```
-airbnb/
-├── controllers/
-│   ├── hostController.js      # Host-side logic (add, edit, delete homes)
-│   └── storeController.js     # Guest-side logic (browse, favourites, details)
-├── models/
-│   ├── home.js                # Mongoose schema for home listings
-│   └── fav.js                 # Mongoose schema for favourites
-├── routes/
-│   ├── hostRouter.js          # Routes for host actions
-│   └── storeRouter.js         # Routes for guest actions
-├── views/
-│   ├── host/                  # EJS templates for host pages
-│   ├── store/                 # EJS templates for guest pages
-│   └── partials/              # Shared partials (nav, etc.)
-├── utils/
-│   └── database.js            # MongoDB connection utility
-├── public/                    # Static assets (CSS, images)
-└── app.js                     # Entry point
-```
+### 🎨 Design & UI
+- **Airbnb-Inspired Esthetics:** Designed using modern CSS, fluid layouts, cohesive colors, and subtle entrance animations to replicate an authentic, premium hospitality experience.
+- **Tailwind Integration:** Utilizing Tailwind V4 (`@tailwindcss/cli`) for atomic utility styling, combined with custom CSS classes for components like cards and beautiful gradient auth screens.
 
 ---
 
-## ⚙️ Getting Started
+## 🛠️ Tech Stack & Dependencies
+
+- **Backend:** Node.js, Express (v5.x)
+- **Database:** MongoDB via Mongoose
+- **Templating:** EJS
+- **Styling:** CSS + TailwindCSS V4
+- **Security & Validation:** `bcryptjs`, `express-validator`
+- **Session Store:** `express-session`, `connect-mongo`
+
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to run the application securely on your local machine.
 
 ### Prerequisites
-
-- [Node.js](https://nodejs.org/) v18+
-- [MongoDB](https://www.mongodb.com/) (local or Atlas)
+- [Node.js](https://nodejs.org/en/) installed
+- Accessible [MongoDB URI](https://www.mongodb.com/) (Local server or MongoDB Atlas)
 
 ### Installation
 
+1. **Clone the Repository**
+   ```bash
+   git clone <your-repository-url>
+   cd airbnb
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup**
+   If required by your configuration, specify your `MONGO_URL` in `utils/database.js` or through a `.env` file!
+
+### Run the Application
+
+The application requires both the node server and the Tailwind CLI watch process to run gracefully side by side. Run the following single command to start both in concurrently:
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/airbnb-clone.git
-cd airbnb-clone
-
-# Install dependencies
-npm install
-```
-
-### Environment Setup
-
-Create a `.env` file in the root directory:
-
-```env
-MONGO_URL=mongodb://localhost:27017/airbnb
-PORT=2008
-```
-
-### Run the App
-
-```bash
-# Development (with nodemon)
-npm run dev
-
-# Production
 npm start
 ```
+*Note: This command runs `nodemon app.js & npm run tailwind` behind the scenes.*
 
-Visit `http://localhost:2008` in your browser.
-
----
-
-## 📌 Routes Overview
-
-### Guest Routes
-
-| Method | Route | Description |
-|---|---|---|
-| GET | `/` | Home / index page |
-| GET | `/store/home-list` | Browse all homes |
-| GET | `/store/home-detail/:homeid` | View a single home |
-| GET | `/store/fav-list` | View favourites |
-| POST | `/store/add-fav/:homeId` | Add a home to favourites |
-| POST | `/store/remove-fav/:homeId` | Remove from favourites |
-| GET | `/store/booking` | Bookings page |
-
-### Host Routes
-
-| Method | Route | Description |
-|---|---|---|
-| GET | `/host/add-home` | Add home form |
-| POST | `/host/add-home` | Submit new home |
-| GET | `/host/host-home-list` | View all listed homes |
-| GET | `/host/edit-home/:homeId` | Edit home form |
-| POST | `/host/edit-home/:homeId` | Submit edited home |
-| POST | `/host/delete-home/:homeId` | Delete a home |
+**The application will be accessible at:**
+`http://localhost:2008`
 
 ---
 
-Author ~ Tusshar Singh
+## 📂 Project Structure
+
+- **`/app.js`**: Application entry point, initializing express, sessions, routes, and mongoDB connections.
+- **`/controllers`**: Handling business and routing logic (e.g., `authController.js`, `storeController.js`).
+- **`/models`**: Mongoose schemas defining our Data structures (`User`, `Home`, `Favourite`).
+- **`/routes`**: Express routers determining pathways structure (`authRouter`, `hostRouter`, `storeRouter`).
+- **`/views`**: EJS templates including views for authorization, navigation partials, host-views, and guest store views.
+- **`/public`**: Publicly accessible static assets, output CSS, and styling sheets.
+
+---
+
+## 🤝 Contribution
+
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page or submit PRs.
+
+## 📝 License
+
+This project is licensed under the **ISC** License.
+
+## 👨‍💻 Author
+
+- **Tusshar Singh**
