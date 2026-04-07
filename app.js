@@ -15,14 +15,14 @@ const error = require('./controllers/errors')
 const mongoose = require('mongoose')               
 const cookieParser = require('cookie-parser')
 const { MONGO_URL, PORT, SESSION_SECRET } = require('./utils/config')
+const multer = require('multer')
 
 mongoose.connect(MONGO_URL)
     .then(() => {
         console.log("Connected to database");
 
-        // Move ALL app setup inside here so DB is ready first
         app.use(session({
-            secret: SESSION_SECRET, // ← also fix this, you had "SESSION_SECRET" as a string
+            secret: SESSION_SECRET, 
             resave: false,
             saveUninitialized: false,                       
             store: MongoStore.create({                   
@@ -42,8 +42,44 @@ mongoose.connect(MONGO_URL)
             next()
         })
 
+        const randomString = (length)=> {
+            const characters = "abcdefghijklmnopqrstuvwxyz";
+            let result = '';
+            for(let i = 0; i< length;i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length))
+            }
+            return result
+        }
+
+        const storage = multer.diskStorage({
+            destination:(req,file,cb)=> {
+                cb(null,'uploads/')
+            },
+            filename: (req,file,cb)=> {
+                cb(null, randomString(10) + '-' + file.originalname )
+            }
+        })
+
+        const fileFilter = (req,file,cb)=> {
+            if(file.mimetype === "image/png"
+            || file.mimetype === "image/jpg"
+            || file.mimetype === "image/jpeg"
+            ) {
+                cb(null,true)
+            } else {
+                cb(null,false)
+            }
+        }
+
+        const multerOptions = {
+            storage , fileFilter
+        }
+
         app.use(express.static(path.join(__dirname, 'public')))
-        app.use(express.urlencoded({ extended: false }))    
+        app.use("/uploads",express.static(path.join(__dirname, 'uploads')))
+        app.use("/host/uploads",express.static(path.join(__dirname, 'uploads')))
+        app.use(express.urlencoded({ extended: false }))
+        app.use(multer(multerOptions).single('photo'))
         app.use(authRouter);
         app.use(storeRouter);
         app.use('/host', (req, res, next) => {
@@ -57,7 +93,7 @@ mongoose.connect(MONGO_URL)
         app.use(error.err)
 
         app.listen(PORT, () => {
-            console.log(`Server running at http://localhost:${PORT}`)
+            console.log(`Your server is successfully running at http://localhost:${PORT}`)
         })
     })
     .catch(err => {

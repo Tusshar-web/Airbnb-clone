@@ -12,8 +12,8 @@ A full-stack web application inspired by Airbnb, built with **Node.js**, **Expre
 - **Session Management:** Secure user sessions stored in MongoDB using `express-session` and `connect-mongo`.
 
 ### 🏨 Host Experience (Property Management)
-- **Add Homes:** Hosts can list their properties providing details such as property name, description, price, location, photos, and ratings.
-- **Manage Listings:** Hosts have access to a dedicated dashboard to view and manage all their actively listed homes.
+- **Add Homes:** Hosts can list their properties providing details such as property name, description, price, location, and ratings. They can also seamlessly **upload property photos** directly to the server.
+- **Manage Listings:** Hosts have access to a dedicated dashboard to view, edit, and manage all their actively listed homes, including updating and replacing photos.
 
 ### ✈️ Guest Experience (Discovery & Booking)
 - **Discover Properties:** Browse through the entire home marketplace.
@@ -34,6 +34,8 @@ A full-stack web application inspired by Airbnb, built with **Node.js**, **Expre
 - **Styling:** CSS + TailwindCSS V4
 - **Security & Validation:** `bcryptjs`, `express-validator`
 - **Session Store:** `express-session`, `connect-mongo`
+- **File Uploads:** `multer` for robust local image storage
+
 
 ---
 

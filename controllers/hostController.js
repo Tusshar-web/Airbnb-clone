@@ -1,5 +1,6 @@
 // const path = require('path')
 const Home = require('../models/home')
+const fs = require('fs')
 
 exports.getAddHome = (req, res, next) => {
 res.render("host/edit-home",{
@@ -12,7 +13,14 @@ res.render("host/edit-home",{
 
 exports.postAddhome = (req,res,next)=> {
     console.log("Your home has been registered successfully:")
-const {houseName,price,location,rating,photo,description} =req.body
+    const {houseName,price,location,rating,description} =req.body
+
+    console.log(houseName,price,location,rating,description)
+    console.log(req.file);
+    if(!req.file) {
+        return res.status(422).send("Image type not supported")
+    }
+    const photo = req.file.path
  const home = new Home({
         houseName,
         price,
@@ -62,14 +70,23 @@ exports.getEditHome = (req,res,next) => {
 
 
 exports.postEditHome = (req, res, next) => {
-    const {id,houseName,price,location,rating,photo,description} =req.body
+    const {id,houseName,price,location,rating,description} =req.body
     Home.findById(id).then((home)=> {
         home.houseName=houseName;
         home.price=price;
         home.location=location;
         home.rating=rating;
-        home.photo=photo;
         home.description=description
+
+        if(req.file) {
+            fs.unlink(home.photo,(err)=> {
+                if(err) {
+                    console.log("Error while deleting the photo ", err)
+                }
+            })
+            home.photo = req.file.path
+        }
+
     home.save().then((result)=> {
         console.log('Home edited successfully ', result)
     }).catch(err => {
