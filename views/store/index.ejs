@@ -64,6 +64,14 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
+.home-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
 .book {
   background-color:  rgb(131, 243, 131) ;
   margin-top: 20px;
@@ -100,10 +108,7 @@
           <p><strong>💰 Price:</strong> ₹<%= home.price %></p>
           <p><strong>⭐ Rating:</strong> <%= home.rating %></p>
           <a class="det_btn" href="/store/home-detail/<%= home._id %>">Details</a>
-          <!-- <button class="book">Book</button> -->
-           <!-- <%- include('../partials/fav', { home: home }) %> -->
         </div>
-
       <% }) %>
     </div>
 </main>

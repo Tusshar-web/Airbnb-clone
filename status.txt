@@ -1,0 +1,29 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   app.js
+	modified:   controllers/hostController.js
+	modified:   package-lock.json
+	modified:   package.json
+	deleted:    public/images/house1.png
+	modified:   utils/config
+	modified:   views/host/edit-home.ejs
+	modified:   views/host/host-home-list.ejs
+	modified:   views/partials/nav.ejs
+	modified:   views/store/fav-list.ejs
+	modified:   views/store/home-list.ejs
+	modified:   views/store/index.ejs
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	diff.txt
+	diff_cmd.txt
+	log.txt
+	public/house1.png
+	status.txt
+	uploads/
+
+no changes added to commit (use "git add" and/or "git commit -a")

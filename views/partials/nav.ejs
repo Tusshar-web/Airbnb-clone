@@ -116,13 +116,14 @@ form {
     <h1>Airbnb Clone</h1>
   </a>
   <div style="display: flex; align-items: center;">
-    <!-- <a href="/">Index</a> -->
-    <a href="/store/home-list">Home</a>
+    <a href="/">Index</a>
+    
     <% if(isLoggedIn) { %>
       <% if (user && user.usertype === 'host') { %>
         <a href="/host/host-home-list">Host Homes</a>
         <a href="/host/add-home">Add Home</a>
       <% } else { %>
+        <a href="/store/home-list">Home</a>
         <a href="/store/booking">Bookings</a>
         <a href="/store/fav-list">Favourite Homes</a>
       <% } %>
