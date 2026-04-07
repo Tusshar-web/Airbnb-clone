@@ -1,5 +1,0 @@
-24b2367 updating readme
-5be1146 add - backend
-233977e Merge branch 'main' of https://github.com/Tusshar-web/Airbnb-clone
-1659a8d adding login and signin pages
-8cf5283 Add README for Airbnb clone project
